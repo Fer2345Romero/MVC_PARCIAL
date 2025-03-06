@@ -42,11 +42,10 @@
         <input type="text" class="form-control" asp-for="Card" placeholder="Carnet" aria-label="Carnet">
     </div>
 
-
-
     <div class="input-group mb-3">
         <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-        <input type="date" class="form-control" asp-for="DateBirth" aria-label="FechaNacimiento">
+        <input type="text" class="form-control" placeholder="Fecha de Nacimiento"
+               onfocus="(this.type='date')" onblur="if(!this.value) this.type='text';" asp-for="DateBirth" aria-label="FechaNacimiento">
     </div>
 
     <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar información </button>

@@ -18,6 +18,20 @@ namespace MVC_PARCIAL.Controllers
             List<Students> students = _dbConnection.Students.ToList();
             return View(students);
         }
+
+        //Muestra los detalles de un estudiante
+        [HttpGet]
+        public IActionResult ViewStudents(int id)
+        {//Busca el estudiante por el id
+            var student = _dbConnection.Students.Find(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return View(student);
+        }
+
+
         [HttpGet]
         public IActionResult UpSert(int id)
         {

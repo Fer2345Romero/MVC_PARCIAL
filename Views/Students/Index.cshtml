@@ -21,7 +21,7 @@
 				<th>StudentId</th>
 				<th>Name</th>
 				<th>LastName</th>
-				<th>Estado</th>
+				<th>Is Active</th>
 				<thead>Acciones</thead>
 				</thead>
 				<tbody>
@@ -43,8 +43,8 @@
 									}
 								</td>
 								<td>
-									<a type="button" class="btn btn-success" asp-action="View" asp-controller="Students" asp-route-id="@students.StudentId">
-										<span class="fas fa-eye"></span>
+									<a type="button" class="btn btn-success" asp-action="ViewStudents" asp-controller="Students" asp-route-id="@students.StudentId">
+										<span class="bi bi-eye"></span>
 									</a>
 									<a type="button" class="btn btn-warning" asp-action="UpSert" asp-controller="Students" asp-route-id="@students.StudentId">
 										<span class="fas fa-pencil"></span>

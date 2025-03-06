@@ -5,7 +5,7 @@
 namespace MVC_PARCIAL.Migrations
 {
     /// <inheritdoc />
-    public partial class ActualizandoStudentsTable : Migration
+
     public partial class ActualizandoStudentsTable : Migration
     {
         /// <inheritdoc />

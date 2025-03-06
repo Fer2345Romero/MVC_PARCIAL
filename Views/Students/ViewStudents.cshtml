@@ -1,0 +1,29 @@
+﻿@model Students
+
+<h2>Detalles del Estudiante</h2>
+
+<table class="table">
+    <tr>
+        <th>Nombre:</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Apellido:</th>
+        <td>@Model.LastName</td>
+    </tr>
+    <tr>
+        <th>Edad:</th>
+        <td>@Model.Age</td>
+    </tr>
+    <tr>
+        <th>Carnet:</th>
+        <td>@Model.Card</td>
+    </tr>
+    <tr>
+        <th>Fecha de Nacimiento:</th>
+        <td>@Model.DateBirth.ToShortDateString()</td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-primary">Volver</a>
+
