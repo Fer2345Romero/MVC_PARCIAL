@@ -8,4 +8,5 @@
         public string? EditedBy { get; set; }
         public DateTime? Edited { get; set; }
     }
+
 }

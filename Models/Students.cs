@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MVC_PARCIAL.Models
 {
@@ -26,5 +27,18 @@ namespace MVC_PARCIAL.Models
         [Required(ErrorMessage = "El campo Carrera es obligatorio")]
         [ForeignKey("Career")]
         public int CareerId { get; set; }
+
+        #region Constructor
+
+        public Students()
+        {
+            DateBirth = DateTime.Now.Date;
+            IsActive = true;
+            Created = DateTime.Now;
+            CreateBy = "Admin";
+        }
+        #endregion Constructor
     }
+
+
 }
