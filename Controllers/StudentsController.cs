@@ -1,14 +1,22 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MVC_PARCIAL.Db;
+using MVC_PARCIAL.Models;
 
 namespace MVC_PARCIAL.Controllers
 {
     public class StudentsController : Controller
     {
-        // GET: StudentsController
-        public ActionResult Index()
+        private readonly AppDbContext _dbConnetion;
+        public StudentsController(AppDbContext appDb)
         {
-            return View();
+            _dbConnetion = appDb;
+        }
+
+        public IActionResult Index()
+        {
+            List<Students> students = _dbConnetion.Students.ToList();
+            return View(students);
         }
 
         // GET: StudentsController/Details/5
