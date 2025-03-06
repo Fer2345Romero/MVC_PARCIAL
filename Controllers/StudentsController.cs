@@ -85,9 +85,9 @@ namespace MVC_PARCIAL.Controllers
                 return NotFound();
             }
 
-            // Solo cambia el estado en lugar de eliminarlo
+            // Solo cambia el estado en lugar de eliminarlo .Uptade eliminar registro .Remove
             student.IsActive = false;
-            _dbConnection.Students.Update(student);
+            _dbConnection.Students.Remove(student);
             _dbConnection.SaveChanges();
 
             return RedirectToAction("Index");
