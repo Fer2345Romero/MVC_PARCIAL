@@ -7,85 +7,76 @@ namespace MVC_PARCIAL.Controllers
 {
     public class StudentsController : Controller
     {
-        private readonly AppDbContext _dbConnetion;
+        private readonly AppDbContext _dbConnection;
         public StudentsController(AppDbContext appDb)
         {
-            _dbConnetion = appDb;
+            _dbConnection = appDb;
         }
 
         public IActionResult Index()
         {
-            List<Students> students = _dbConnetion.Students.ToList();
+            List<Students> students = _dbConnection.Students.ToList();
             return View(students);
         }
-
-        // GET: StudentsController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public IActionResult UpSert(int id)
         {
-            return View();
+            // Si el id es 0, significa que es un registro nuevo
+            Students student = id == 0 ? new Students() : _dbConnection.Students.Find(id);
+
+            if (student == null)
+            {
+                return NotFound(); // Manejo de error si el estudiante no existe
+            }
+
+            return View(student);
         }
 
-        // GET: StudentsController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: StudentsController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult UpSert(Students model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (model.StudentId == 0)
+                {
+                    _dbConnection.Students.Add(model);
+                }
+                else
+                {
+                    _dbConnection.Students.Update(model);
+                }
+
+                _dbConnection.SaveChanges();
+                return RedirectToAction("Index");
             }
             catch
+
             {
-                return View();
+                return View(model);
             }
         }
 
-        // GET: StudentsController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public IActionResult Delete(int id)
         {
-            return View();
-        }
+            var student = _dbConnection.Students.Find(id);
 
-        // POST: StudentsController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+            if (student == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: StudentsController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            // Solo cambia el estado en lugar de eliminarlo
+            student.IsActive = false;
+            _dbConnection.Students.Update(student);
+            _dbConnection.SaveChanges();
 
-        // POST: StudentsController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }

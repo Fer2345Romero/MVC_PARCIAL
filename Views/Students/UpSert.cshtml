@@ -1,5 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Students;
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Students" asp-action="Index">Index</a>
+
+        </li>
+        <li class="breadcrumb-item">Agregar nuevo registro</li>
+    </ol>
+</nav>
+
+<input type="hidden" asp-for="StudentId" value="@Model." placeholder="StudentId" aria-label="Edad">
+
+
+<form asp-action="UpSert" asp-controller="Students" method="POST">
+    <div asp-validation-summary="All">
+        <i class="bi bi-exclation-triangle-fill"></i>
+    </div>
+
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="bi bi-person"></i></span>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Nombres" aria-label="Estudiante">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="bi bi-person"></i></span>
+        <input type="text" class="form-control" asp-for="LastName" placeholder="Apellidos" aria-label="Apellidos">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="bi bi-list"></i></span>
+        <input type="number" class="form-control" asp-for="Age" value="@((Model.Age == 0)? string.Empty : Model.Age)" placeholder="Edad" aria-label="Edad">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="bi bi-card-list"></i></span>
+        <input type="text" class="form-control" asp-for="Card" placeholder="Carnet" aria-label="Carnet">
+    </div>
+
+
+
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+        <input type="date" class="form-control" asp-for="DateBirth" aria-label="FechaNacimiento">
+    </div>
+
+    <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar información </button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }

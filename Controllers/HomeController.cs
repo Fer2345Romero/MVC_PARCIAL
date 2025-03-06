@@ -7,7 +7,7 @@ namespace MVC_PARCIAL.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
+    //Constructore en el que se inicializa
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
